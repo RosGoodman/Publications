@@ -1,6 +1,11 @@
+using Publications.DAL.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<PublicationsDB>(opt => opt
+    .UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 var app = builder.Build();
 
