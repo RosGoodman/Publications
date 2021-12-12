@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publications.ConsoleTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Publications.MVC", "UI\Publications.MVC\Publications.MVC.csproj", "{192246E7-E433-4362-90C9-5DD92EA2127D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Publications.WPF", "Publications.WPF\Publications.WPF.csproj", "{90A65E42-FA18-4B59-AF35-6756A205350F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{192246E7-E433-4362-90C9-5DD92EA2127D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{192246E7-E433-4362-90C9-5DD92EA2127D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{192246E7-E433-4362-90C9-5DD92EA2127D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90A65E42-FA18-4B59-AF35-6756A205350F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A65E42-FA18-4B59-AF35-6756A205350F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A65E42-FA18-4B59-AF35-6756A205350F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A65E42-FA18-4B59-AF35-6756A205350F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{FDC0DCA2-AE3A-488A-B749-1BFF3E62AB2D} = {BBE3F7D2-9EB7-49AC-A128-225A0089386B}
 		{74816E58-A8EB-43E6-B232-09D291DC87DA} = {3FD0217D-637C-4431-9D2D-06BCDACED39A}
 		{192246E7-E433-4362-90C9-5DD92EA2127D} = {B32DCC06-B179-4AA3-82D1-C05158E7BB8F}
+		{90A65E42-FA18-4B59-AF35-6756A205350F} = {B32DCC06-B179-4AA3-82D1-C05158E7BB8F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01F12FD4-B251-497D-9E15-0D8589AB9238}
