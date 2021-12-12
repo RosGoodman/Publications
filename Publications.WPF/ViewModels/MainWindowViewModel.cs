@@ -29,9 +29,10 @@ internal class MainWindowViewModel : ViewModel
 
     #region ShowMessageCommand - отображение диалога с пользователем
 
-    private Command? _ShowMessageCommand;
+    private ICommand? _ShowMessageCommand;
 
-    public ICommand ShowMessageCommand => _ShowMessageCommand ??= new RelayCommand(OnShowMessageCommandExecuted, CanShowMessageCommandExecute);
+    //public ICommand ShowMessageCommand => _ShowMessageCommand ??= new RelayCommand(OnShowMessageCommandExecuted, CanShowMessageCommandExecute);
+    public ICommand ShowMessageCommand => _ShowMessageCommand ??= Command.New(OnShowMessageCommandExecuted, CanShowMessageCommandExecute);
 
     private static bool CanShowMessageCommandExecute(object? parameter) => parameter switch
     {
@@ -50,5 +51,16 @@ internal class MainWindowViewModel : ViewModel
 
     #endregion
 
+    #region CloseMainWindowCommand - команда закрытия главного окна
 
+    private ICommand _CloseMainWindowCommand;
+
+    public ICommand CloseMainWindowCommand => _CloseMainWindowCommand ??= Command.New(OnCloseMainWidowCommandExecute);
+
+    private void OnCloseMainWidowCommandExecute()
+    {
+        Application.Current.MainWindow?.Close();
+    }
+
+    #endregion
 }
