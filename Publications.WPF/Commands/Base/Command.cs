@@ -4,18 +4,16 @@ using System.Windows.Input;
 
 namespace Publications.WPF.Commands.Base
 {
-    internal class Command : ICommand
-    {
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object? parameter)
+   public abstract class Command : ICommand
+   {
+        public event EventHandler? CanExecuteChanged
         {
-            throw new NotImplementedException();
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
         }
 
-        public void Execute(object? parameter)
-        {
-            throw new NotImplementedException();
-        }
+        public virtual bool CanExecute(object? parameter) => true;
+
+        public abstract void Execute(object? parameter);
     }
 }
