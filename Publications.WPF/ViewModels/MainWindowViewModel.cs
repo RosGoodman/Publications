@@ -1,5 +1,4 @@
 ﻿
-using Publications.WPF.Commands;
 using Publications.WPF.Commands.Base;
 using Publications.WPF.ViewModels.Base;
 using System.Windows;
@@ -13,7 +12,7 @@ internal class MainWindowViewModel : ViewModel
 
     public string Title { get => _title; set => _title = value; }
 
-
+    //--------------------------------------------------------------------
 
     #region MessageText
 
@@ -25,14 +24,17 @@ internal class MainWindowViewModel : ViewModel
 
     #endregion
 
-
+    //--------------------------------------------------------------------
 
     #region ShowMessageCommand - отображение диалога с пользователем
 
-    private ICommand? _ShowMessageCommand;
+    private Command? _ShowMessageCommand;
 
     //public ICommand ShowMessageCommand => _ShowMessageCommand ??= new RelayCommand(OnShowMessageCommandExecuted, CanShowMessageCommandExecute);
-    public ICommand ShowMessageCommand => _ShowMessageCommand ??= Command.New(OnShowMessageCommandExecuted, CanShowMessageCommandExecute);
+    public ICommand ShowMessageCommand => _ShowMessageCommand ??= Command
+        .Invoke(OnShowMessageCommandExecuted)
+        .When(CanShowMessageCommandExecute)
+        .Debug();
 
     private static bool CanShowMessageCommandExecute(object? parameter) => parameter switch
     {
@@ -40,6 +42,8 @@ internal class MainWindowViewModel : ViewModel
         _ => parameter is not null
     };
 
+    /// <summary> Команда. Показать сообщение с указаанным текстом. </summary>
+    /// <param name="parameter"> Текст сообщения. </param>
     private static void OnShowMessageCommandExecuted(object? parameter)
     {
         if (parameter is not { } value) return;
@@ -51,16 +55,20 @@ internal class MainWindowViewModel : ViewModel
 
     #endregion
 
+    //--------------------------------------------------------------------
+
     #region CloseMainWindowCommand - команда закрытия главного окна
 
-    private ICommand _CloseMainWindowCommand;
+    private Command _CloseMainWindowCommand;
 
-    public ICommand CloseMainWindowCommand => _CloseMainWindowCommand ??= Command.New(OnCloseMainWidowCommandExecute);
+    //public ICommand CloseMainWindowCommand => _CloseMainWindowCommand ??= Command.New(OnCloseMainWidowCommandExecute);
+    public ICommand CloseMainWindowCommand => _CloseMainWindowCommand ??= Command
+        .Invoke(OnCloseMainWidowCommandExecute)
+        .Invoke(p => MessageBox.Show("Было приятно с вами работать."))
+        .When(p => p is null);
 
-    private void OnCloseMainWidowCommandExecute()
-    {
-        Application.Current.MainWindow?.Close();
-    }
+    /// <summary> Команда. Закрыть окно MainWindow. </summary>
+    private void OnCloseMainWidowCommandExecute(object? p) => Application.Current.MainWindow?.Close();
 
     #endregion
 }

@@ -19,9 +19,9 @@
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem Content="К бою готов."/>
         </StatusBar>
-        <TextBox VerticalAlignment="Top" Margin="50"
+        <TextBox VerticalAlignment="Top" Margin="50" Width="150"
                     Text="{Binding MessageText, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button VerticalAlignment="Center" HorizontalAlignment="Center"
+        <Button VerticalAlignment="Center" HorizontalAlignment="Left"
                 Padding="120, 30" Content="Сообщение"
                 Command="{Binding ShowMessageCommand}"
                 CommandParameter="{Binding MessageText}"/>

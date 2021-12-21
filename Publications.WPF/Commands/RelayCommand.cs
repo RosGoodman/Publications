@@ -1,5 +1,4 @@
 ﻿
-
 using Publications.WPF.Commands.Base;
 using System;
 
@@ -9,6 +8,7 @@ namespace Publications.WPF.Commands
     {
         private readonly Action<object?> _Execute;
         private readonly Func<object?, bool> _CanExecute;
+
         public RelayCommand(Action<object?> Execute, Func<object?, bool>? CanExecute = null)
         {
             _Execute = Execute ?? throw new ArgumentNullException(nameof(Execute));
