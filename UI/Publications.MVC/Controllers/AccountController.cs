@@ -16,6 +16,22 @@ public class AccountController : Controller
         SignInManager<User> signInManager, 
         ILogger<AccountController> logger)
     {
+        //на самом нихком уровне в системе Identity реализуют механизмы управления данными
+        //текущем случае - это БД, но при определенной конфигурации это может быть облако или файл и др.
+        //система Identity конфигурируется в файлу Program строкой 
+        //.AddEntityFrameworkStores<PublicationsDB>()
+        //userManager
+        IUserStore<User> user_store;
+        IRoleStore<User> role_store;
+        IUserPasswordStore<User> user_password_store;
+        IUserPhoneNumberStore<User> user_phone_store;
+        IUserEmailStore<User> user_email_store;
+        IUserClaimStore<User> user_claim_store;
+        IPasswordHasher<User> hasher;
+        //signInManager
+        IUserLoginStore<User> user_logins;
+        IUserLockoutStore<User> user_lockouts;
+
         _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
