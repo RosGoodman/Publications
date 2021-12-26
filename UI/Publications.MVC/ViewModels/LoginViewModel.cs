@@ -14,10 +14,10 @@ public class LoginViewModel
     [DataType(DataType.Password)]  //тип данных
     public string Password { get; set; }
 
-    [Display(Name = "Подтверждение пароля")]
+    [Display(Name = "Запомнить меня")]
     public bool RememberMe { get; set; }
 
     /// <summary> Куда выполнять еренаправление (возвращаться). </summary>
     [HiddenInput(DisplayValue = false)]
-    public string ReturnUrl { get; set; }
+    public string? ReturnUrl { get; set; }
 }

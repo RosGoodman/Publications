@@ -26,7 +26,7 @@ services.Configure<IdentityOptions>(opt =>
 #endif
 
     opt.User.RequireUniqueEmail = false;
-    opt.User.AllowedUserNameCharacters = "abcdifghijklmnopqrstuvwxyzABCDIFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     opt.Lockout.AllowedForNewUsers = false; //менять идентификатор сессии, если пользователь залогинился
     opt.Lockout.MaxFailedAccessAttempts = 10;
