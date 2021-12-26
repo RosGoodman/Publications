@@ -42,7 +42,7 @@ services.ConfigureApplicationCookie(opt =>
 
     opt.ExpireTimeSpan = TimeSpan.FromDays(10); //перезапрошены будут через 10 дней
 
-    //перенаправление в лучае необходимости выйти и войти в систему
+    //перенаправление на контроллеры в случае необходимости выйти и войти в систему
     opt.LoginPath = "Account/Login";
     opt.LogoutPath = "Account/Logout";
     opt.AccessDeniedPath = "Account/AccessDenied";
