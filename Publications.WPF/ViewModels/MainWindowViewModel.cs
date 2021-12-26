@@ -1,6 +1,8 @@
 ﻿
 using Publications.WPF.Commands.Base;
 using Publications.WPF.ViewModels.Base;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -71,4 +73,8 @@ internal class MainWindowViewModel : ViewModel
     private void OnCloseMainWidowCommandExecute(object? p) => Application.Current.MainWindow?.Close();
 
     #endregion
+
+    private ObservableCollection<string> _items = new();
+
+    public ICollection<string> Items => _items;
 }

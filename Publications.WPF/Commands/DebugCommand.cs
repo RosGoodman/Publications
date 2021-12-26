@@ -37,7 +37,7 @@ public class DebugCommand : Command, ICommand
         Debug.WriteLine("Вызов команды {0} {1}", _baseCommand.GetHashCode(), _baseCommand.GetType());
         var timer = Stopwatch.StartNew();
         _baseCommand.Execute(parameter);
-        Debug.WriteLine("Вызов команды {0} {1} завершен за {2:0.00}",
+        Debug.WriteLine("Вызов команды {0} {1} завершен за {2:0.00}сек.",
             _baseCommand.GetHashCode(), _baseCommand.GetType(),
             timer.Elapsed.TotalSeconds);
     }
