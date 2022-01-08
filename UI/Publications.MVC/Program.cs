@@ -2,11 +2,18 @@ using Publications.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Publications.Domain.Entityes.Identity;
 using Microsoft.AspNetCore.Identity;
+using Publications.MVC.infrastructure.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
-services.AddControllersWithViews();
+
+//пакет RuntimeCompilation позволяет тут добавить
+//вместо services.AddControllersWithViews();
+services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
+//это позволить в режиме отладки динамически менять содержимое представления (необходимо было до появления кнопки "горячая перезагрузка")
+
+
 services.AddDbContext<PublicationsDB>(opt => opt
     .UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
@@ -66,16 +73,23 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
+
+    //пакет browserLinck позволяет добавить спец. промежуточное ПО
+    //app.UseBrowserLink();
+    //переписывает html, который образуется в результате запроса
+    //добавляет в конец скрипт, который устанавливает соединение с VS (см. "информационная панель связи с браузером")
 }
 
-app.UseHttpsRedirection();
+//пример добавления цепочки в качестве промежуточного ПО
+app.UseMiddleware<TestMiddleware>();
+
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
 //подключение системы идентити
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
