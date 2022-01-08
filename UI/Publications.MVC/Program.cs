@@ -10,7 +10,7 @@ var services = builder.Services;
 
 //пакет RuntimeCompilation позволяет тут добавить
 //вместо services.AddControllersWithViews();
-services.AddControllersWithViews();//.AddRazorRuntimeCompilation();
+services.AddControllersWithViews().AddRazorRuntimeCompilation();
 //это позволить в режиме отладки динамически менять содержимое представления (необходимо было до появления кнопки "горячая перезагрузка")
 
 
@@ -75,15 +75,15 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 
     //пакет browserLinck позволяет добавить спец. промежуточное ПО
-    //app.UseBrowserLink();
+    app.UseBrowserLink();
     //переписывает html, который образуется в результате запроса
     //добавляет в конец скрипт, который устанавливает соединение с VS (см. "информационная панель связи с браузером")
 }
 
 //пример добавления цепочки в качестве промежуточного ПО
-app.UseMiddleware<TestMiddleware>();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
