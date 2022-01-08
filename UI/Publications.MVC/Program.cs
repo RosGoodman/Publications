@@ -73,7 +73,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-//подключение систеы идентити
+//подключение системы идентити
 app.UseAuthentication();
 
 app.UseAuthorization();
