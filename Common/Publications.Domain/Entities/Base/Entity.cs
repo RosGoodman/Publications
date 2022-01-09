@@ -1,9 +1,10 @@
 ﻿
+using Publications.Interfaces.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Publications.Domain.Entityes
+namespace Publications.Domain.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : IEntity
     {
         public int Id { get; set; }
     }

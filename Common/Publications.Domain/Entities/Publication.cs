@@ -1,6 +1,6 @@
 ﻿
 
-namespace Publications.Domain.Entityes
+namespace Publications.Domain.Entities
 {
     public class Publication : NamedEntity
     {
@@ -11,7 +11,7 @@ namespace Publications.Domain.Entityes
 
     public class Person : NamedEntity
     {
-        public string Name { get; set; }
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
+        public string Patronymic { get; set; }
     }
 }

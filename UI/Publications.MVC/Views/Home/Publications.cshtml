@@ -1,0 +1,13 @@
+﻿@using Publications.Domain.Entities
+@model IEnumerable<Publications.Domain.Entities.Publication>
+
+@{
+    ViewBag.Title = "Публикация";
+}
+
+<ul>
+@foreach(var publication in Model)
+{
+    <li>@publication.Id - @publication.Name</li>
+}
+</ul>

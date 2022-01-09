@@ -2,8 +2,8 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Publications.Domain.Entityes;
-using Publications.Domain.Entityes.Identity;
+using Publications.Domain.Entities;
+using Publications.Domain.Entities.Identity;
 
 namespace Publications.DAL.Context;
 

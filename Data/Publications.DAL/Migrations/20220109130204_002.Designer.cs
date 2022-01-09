@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Publications.DAL.Context;
@@ -11,9 +12,10 @@ using Publications.DAL.Context;
 namespace Publications.DAL.Migrations
 {
     [DbContext(typeof(PublicationsDB))]
-    partial class PublicationsDBModelSnapshot : ModelSnapshot
+    [Migration("20220109130204_002")]
+    partial class _002
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -226,20 +228,16 @@ namespace Publications.DAL.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Patronymic")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("PublicationId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("SecondName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

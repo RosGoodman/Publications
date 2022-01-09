@@ -39,7 +39,7 @@ public class DbRepository<T> : IRepository<T> where T : class, IEntity
         if(item is null) return false;
 
         _db.Entry(item).State = EntityState.Deleted;
-        await _db.SaveChangesAsync();
+        await _db.SaveChangesAsync(cancel);
         return true;
     }
 

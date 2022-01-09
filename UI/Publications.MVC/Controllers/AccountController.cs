@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Publications.Domain.Entityes.Identity;
+using Publications.Domain.Entities.Identity;
 using Publications.MVC.ViewModels;
 
 namespace Publications.MVC.Controllers;

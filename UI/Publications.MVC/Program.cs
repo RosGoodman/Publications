@@ -1,8 +1,11 @@
 using Publications.DAL.Context;
 using Microsoft.EntityFrameworkCore;
-using Publications.Domain.Entityes.Identity;
+using Publications.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Publications.MVC.infrastructure.Middleware;
+using Publications.Interfaces.Repositories;
+using Publications.DAL.Repositories;
+using Publications.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,9 @@ services.AddDbContext<PublicationsDB>(opt => opt
 services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<PublicationsDB>()
     .AddDefaultTokenProviders();
+
+//регистрируем интерфейс IReposytory без указания типа. Реализацией будет класс DbRepository
+services.AddScoped(typeof(IRepository<>), typeof(DbRepository<>));
 
 services.Configure<IdentityOptions>(opt =>
 {
@@ -65,8 +71,32 @@ using (var scope = app.Services.CreateAsyncScope())
 
     await db.Database.MigrateAsync();   //Создание БД в случае ее отсутствия и приведение ее к последнему состоянию
 
-    var id = 5;
-    var some_publication = await db.Publications.FirstOrDefaultAsync(p => p.Id == id);
+    if (!db.Publications.Any())
+    {
+        var authors = Enumerable.Range(1, 5).Select(
+            i => new Person
+            {
+                LastName = $"LastName-{i}",
+                Name = $"Name-{i}",
+                Patronymic = $"Patronymic-{i}",
+            }).ToArray();
+
+        var rnd = new Random();
+
+        var publications = Enumerable.Range(1, 50).Select(i => new Publication
+        {
+            Name = $"Publication-{i}",
+            Date = DateTime.Now.AddYears(-rnd.Next(5, 21)),
+            Authors = Enumerable.Range(1, rnd.Next(1, 4))
+               .Select(_ => authors[rnd.Next(authors.Length)])
+               .Distinct()
+               .ToList()
+        });
+
+        db.Publications.AddRange(publications);
+
+        db.SaveChanges();
+    }
 }
 
 if (!app.Environment.IsDevelopment())
