@@ -3,18 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Publications.MVC.Controllers.API
 {
-    [Route("api/console")]
-    [ApiController]
+    [ApiController, Route("api/console")]
     public class ConsoleApiController : ControllerBase
     {
-        [HttpGet("Clear")]
+        [HttpGet("clear")]
         public void Clear() => Console.Clear();
 
-        [HttpGet("WriteLine/{message}")]
-        public void WriteLine(string message) => Console.WriteLine(message);
+        [HttpGet("WriteLine/{Message}")]
+        public void WriteLine(string Message) => Console.WriteLine(Message);
 
-
-        [HttpGet("throw/{message}")]
-        public void Throw(string message) => throw new ApplicationException(message);
+        [HttpGet("throw/{Message}")]
+        public void Throw(string Message) => throw new ApplicationException(Message);
     }
 }

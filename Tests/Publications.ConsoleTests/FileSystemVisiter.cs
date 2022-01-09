@@ -1,38 +1,56 @@
-﻿
-namespace Publications.ConsoleTests
+﻿namespace Publications.ConsoleTests;
+
+internal class FileSystemVisiter
 {
-    public partial class Program
+    public int CountSourceCodeLines(FileSystemInfo info)
     {
-        internal class FileSystemVisiter
+        Console.WriteLine(info.FullName);
+
+        var lines_count = 0;
+        switch (info)
         {
-            public int Visit(FileSystemInfo info)
-            {
-                Console.WriteLine(info.FullName);
+            case DirectoryInfo dir:
 
-                var linesCount = 0;
-                switch (info)
+                foreach (var dir_info in dir.EnumerateFileSystemInfos())
                 {
-                    case DirectoryInfo dir:
-
-                        foreach(var dir_info in dir.EnumerateFileSystemInfos())
-                        {
-                            linesCount += Visit(dir_info);
-                        }
-
-                        break;
-                    case FileInfo { Extension: ".cs" } file:
-
-                        using(var reader = file.OpenText())
-                            while (!reader.EndOfStream)
-                                if(reader.ReadLine() is { Length: > 0})
-                                    linesCount++;
-
-                        Console.WriteLine("Число строк в файле {0}: {1}", info.Name, linesCount);
-                        break;
+                    lines_count += CountSourceCodeLines(dir_info);
                 }
 
-                return linesCount;
-            }
+                break;
+
+            case FileInfo { Extension: ".cs" } file:
+                using (var reader = file.OpenText())
+                    while (!reader.EndOfStream)
+                        if (reader.ReadLine() is { Length: > 0 })
+                            lines_count++;
+
+                Console.WriteLine("Число строк в файле {0}: {1}", info.Name, lines_count);
+                break;
         }
+
+        return lines_count;
+    }
+
+    public List<FileInfo> GetSourceFiles(FileSystemInfo info)
+    {
+        var result = new List<FileInfo>();
+
+        switch (info)
+        {
+            case DirectoryInfo dir:
+
+                foreach (var dir_info in dir.EnumerateFileSystemInfos())
+                {
+                    result.AddRange(GetSourceFiles(dir_info));
+                }
+
+                break;
+
+            case FileInfo { Extension: ".cs" } file:
+                result.Add(file);
+                break;
+        }
+
+        return result;
     }
 }

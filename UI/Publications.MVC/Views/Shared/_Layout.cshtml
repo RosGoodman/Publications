@@ -6,12 +6,10 @@
     <title>@ViewData["Title"] - Publications.MVC</title>
 
     @await Html.PartialAsync("Partial/_Styles")
-
+    
     @await RenderSectionAsync("Styles", false)
-
 </head>
 <body>
-
     @await Html.PartialAsync("Partial/_Header")
     
     <div class="container">
@@ -21,7 +19,7 @@
     </div>
 
     @await Html.PartialAsync("Partial/_Footer")
-
+    
     @await Html.PartialAsync("Partial/_Scripts")
 
     @await RenderSectionAsync("Scripts", required: false)

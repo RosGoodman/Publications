@@ -1,23 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Publications.MVC.ViewModels;
 
 public class LoginViewModel
 {
-    [Required]  //говорит о том, что UserName является обязательным
+    [Required]
     [Display(Name = "Имя пользователя")]
     public string UserName { get; set; }
 
     [Required]
     [Display(Name = "Пароль")]
-    [DataType(DataType.Password)]  //тип данных
+    [DataType(DataType.Password)]
     public string Password { get; set; }
 
     [Display(Name = "Запомнить меня")]
     public bool RememberMe { get; set; }
 
-    /// <summary> Куда выполнять еренаправление (возвращаться). </summary>
     [HiddenInput(DisplayValue = false)]
     public string? ReturnUrl { get; set; }
 }

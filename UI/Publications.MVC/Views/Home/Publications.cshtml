@@ -1,13 +1,16 @@
-﻿@using Publications.Domain.Entities
-@model IEnumerable<Publications.Domain.Entities.Publication>
+﻿@model IEnumerable<Publications.Domain.Entities.Publication>
 
 @{
-    ViewBag.Title = "Публикация";
+    ViewBag.Title = "Публикации";
 }
 
 <ul>
-@foreach(var publication in Model)
-{
-    <li>@publication.Id - @publication.Name</li>
-}
+    @foreach (var publication in Model)
+    {
+        <li>
+            <a asp-action="PublicationInfo" asp-route-id="@publication.Id">
+                @publication.Id - @publication.Name
+            </a>
+        </li>
+    }
 </ul>

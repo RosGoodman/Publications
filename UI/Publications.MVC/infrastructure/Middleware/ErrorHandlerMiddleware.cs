@@ -1,31 +1,38 @@
-﻿namespace Publications.MVC.infrastructure.Middleware;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class ErrorHandlerMiddleware
+namespace Publications.MVC.Infrastructure.Middleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ErrorHandlerMiddleware> _logger;
-
-    public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> logger)
+    public class ErrorHandlerMiddleware
     {
-        _next = next;
-        _logger = logger;
-    }
+        private readonly RequestDelegate _Next;
+        private readonly ILogger<ErrorHandlerMiddleware> _Logger;
 
-    public async Task InvokeAsync(HttpContext context)
-    {
-        try
+        public ErrorHandlerMiddleware(RequestDelegate next, ILogger<ErrorHandlerMiddleware> Logger)
         {
-            await _next(context);
+            _Next = next;
+            _Logger = Logger;
         }
-        catch (Exception ex)
-        {
-            HandlerException(ex, context);
-            throw;
-        }
-    }
 
-    private void HandlerException(Exception err, HttpContext context)
-    {
-        _logger.LogError(err, "Ошибка при обработке запроса к {0}", context.Request.Path);
+        public async Task InvokeAsync(HttpContext context)
+        {
+            try
+            {
+                await _Next(context);
+            }
+            catch (Exception e)
+            {
+                HandleException(e, context);
+                throw;
+            }
+        }
+
+        private void HandleException(Exception Error, HttpContext Context)
+        {
+            _Logger.LogError(Error, "Ошибка при обработке запроса к {0}", Context.Request.Path);
+        }
     }
 }

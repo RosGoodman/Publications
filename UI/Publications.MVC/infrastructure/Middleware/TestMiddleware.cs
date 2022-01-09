@@ -1,22 +1,21 @@
-﻿namespace Publications.MVC.infrastructure.Middleware;
+﻿namespace Publications.MVC.Infrastructure.Middleware;
 
-///конвейер
 public class TestMiddleware
 {
-    private readonly RequestDelegate _next;
+    private readonly RequestDelegate _Next;
 
-    public TestMiddleware(RequestDelegate next) => _next = next;
+    public TestMiddleware(RequestDelegate next) => _Next = next;
 
     public async Task InvokeAsync(HttpContext context)
     {
-        //мы начинаем анализ данных внутри context
+        // Мы начинаем анализ данных внутри context
 
-        var next = _next(context); //вызываем слудующую часть ковейера
+        var next = _Next(context); // Вызываем следующую часть конвейера
 
-        //параллельно конвейеру выполняем какие-то действия
+        // параллельно конвейеру выполняем какие-то действия
 
-        await next;   //синхронизируемся с остальной цепочкой обработки запроса
+        await next; // синхронизируемся с остальной цепочкой обработки запроса
 
-        //выполняем алализ и постобработку данных в context
+        // выполняем анализ и постобработку данных в context
     }
 }

@@ -6,14 +6,12 @@
     <title>@ViewData["Title"] - Publications.MVC</title>
 
     @await Html.PartialAsync("Partial/_Styles")
-
+    
     @await RenderSectionAsync("Styles", false)
-
 </head>
-
 <body>
     @RenderBody()
-
+    
     @await Html.PartialAsync("Partial/_Scripts")
 
     @await RenderSectionAsync("Scripts", required: false)

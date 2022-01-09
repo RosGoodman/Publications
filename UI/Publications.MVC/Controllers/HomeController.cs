@@ -1,21 +1,32 @@
-﻿
-
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Publications.DAL;
+using Publications.DAL.Context;
 using Publications.Domain.Entities;
 using Publications.Interfaces.Repositories;
 using Publications.MVC.Models;
-using System.Diagnostics;
 
 namespace Publications.MVC.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ILogger<HomeController> _Logger;
 
-    public HomeController(ILogger<HomeController> logger) => _logger = logger;
+    public HomeController(ILogger<HomeController> Logger) => _Logger = Logger;
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index(/*[FromServices] IUnitOfWork Work, [FromServices] PublicationsDB db*/)
     {
+        //using (var transaction = await Work.BeginTransaction())
+        //{
+        //    db.Persons.Add(new Person { });
+
+        //    await Work.SaveChanges();
+
+        //    await Work.CommitTransaction();
+        //}
+
+        ViewBag.Value = "Hello World!";
+
         return View();
     }
 
@@ -30,5 +41,13 @@ public class HomeController : Controller
         var publications = await Publications.GetAllAsync();
 
         return View(publications);
+    }
+
+    public async Task<IActionResult> PublicationInfo(int id, [FromServices] IRepository<Publication> Publications)
+    {
+        var publication = await Publications.GetAsync(id);
+        if (publication is null)
+            return NotFound();
+        return View(publication);
     }
 }
